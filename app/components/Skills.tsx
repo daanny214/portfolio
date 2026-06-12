@@ -1,14 +1,9 @@
 "use client";
 
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { useEffect, useRef, useState } from "react";
+import { Smartphone, Globe, Server, Wrench, Gauge, Layers } from "lucide-react";
+import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 const skills = [
   { name: "React Native", level: 80 },
@@ -23,106 +18,151 @@ const skills = [
 ];
 
 const technologies = [
-  { category: "📱 Mobile", items: ["React Native", "Expo", "Android", "iOS"] },
   {
-    category: "🌐 Frontend",
+    category: "Mobile",
+    icon: Smartphone,
+    items: ["React Native", "Expo", "Android", "iOS"],
+  },
+  {
+    category: "Frontend",
+    icon: Globe,
     items: ["React.js", "Next.js", "Tailwind CSS", "TypeScript"],
   },
   {
-    category: "⚙️ Backend",
+    category: "Backend",
+    icon: Server,
     items: ["Node.js", "Express", "REST APIs", "Firebase"],
   },
-  { category: "🛠️ Tools", items: ["Git", "GitHub", "Figma", "AI"] },
+  {
+    category: "Tools",
+    icon: Wrench,
+    items: ["Git", "GitHub", "Figma", "AI"],
+  },
 ];
+
+function SkillBars() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="space-y-5">
+      {skills.map((skill, i) => (
+        <div key={skill.name}>
+          <div className="flex justify-between items-baseline mb-2">
+            <span className="text-sm font-medium text-gray-200">
+              {skill.name}
+            </span>
+            <span className="font-mono text-xs text-purple-300">
+              {skill.level}%
+            </span>
+          </div>
+          <div className="h-2.5 rounded-full bg-white/5 border border-white/5 overflow-hidden">
+            <div
+              className="h-full rounded-full bg-linear-to-r from-violet-500 to-fuchsia-500 shimmer transition-[width] duration-1000 ease-out"
+              style={{
+                width: started ? `${skill.level}%` : "0%",
+                transitionDelay: `${i * 90}ms`,
+              }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-16 sm:py-24 bg-slate-900">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Title */}
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">
-            Skills & Expertise
-          </h2>
-          <p className="text-gray-400 text-base sm:text-lg">
-            What I bring to the table
-          </p>
-          <div className="w-16 h-1 bg-purple-500 mx-auto mt-3 sm:mt-4 rounded-full" />
-        </div>
+    <section id="skills" className="relative py-20 sm:py-28 overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-fuchsia-600/10 rounded-full blur-3xl" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-start">
-          {/* Left - Bar Chart */}
-          <div className="bg-slate-800 rounded-2xl p-4 sm:p-6 border border-slate-700">
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-              Proficiency Levels
-            </h3>
-            <p className="text-gray-500 text-xs mb-4 sm:mb-6">
-              Based on hands-on project experience
-            </p>
-            <ResponsiveContainer width="100%" height={340}>
-              <BarChart
-                data={skills}
-                layout="vertical"
-                margin={{ top: 0, right: 20, left: 10, bottom: 0 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                <XAxis
-                  type="number"
-                  domain={[0, 100]}
-                  tick={{ fill: "#94a3b8", fontSize: 11 }}
-                  tickFormatter={(value) => `${value}%`}
-                />
-                <YAxis
-                  type="category"
-                  dataKey="name"
-                  tick={{ fill: "#94a3b8", fontSize: 11 }}
-                  width={95}
-                />
-                <Tooltip
-                  formatter={(value) => [`${value}%`, "Proficiency"]}
-                  contentStyle={{
-                    backgroundColor: "#1e293b",
-                    border: "1px solid #475569",
-                    borderRadius: "8px",
-                    color: "#f1f5f9",
-                    fontSize: "13px",
-                  }}
-                />
-                <Bar dataKey="level" fill="#9333ea" radius={[0, 6, 6, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          index="02"
+          tag="Skills"
+          title="Skills & Expertise"
+          subtitle="What I bring to the table"
+        />
 
-          {/* Right - Tech Stack Grid */}
-          <div className="space-y-4 sm:space-y-5">
-            <div>
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-                Tech Stack
-              </h3>
-              <p className="text-gray-500 text-xs">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 items-start">
+          {/* Left — Proficiency bars */}
+          <Reveal direction="left">
+            <div className="bg-white/3 rounded-3xl p-6 sm:p-8 border border-white/5 hover:border-purple-500/30 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-1">
+                <span className="w-9 h-9 flex items-center justify-center rounded-xl bg-purple-500/10 border border-purple-500/20">
+                  <Gauge size={17} className="text-purple-400" />
+                </span>
+                <h3 className="font-display text-lg sm:text-xl font-bold text-white">
+                  Proficiency Levels
+                </h3>
+              </div>
+              <p className="text-gray-500 text-xs mb-7 ml-12">
+                Based on hands-on project experience
+              </p>
+              <SkillBars />
+            </div>
+          </Reveal>
+
+          {/* Right — Tech stack */}
+          <div className="space-y-5">
+            <Reveal direction="right">
+              <div className="flex items-center gap-3 mb-1">
+                <span className="w-9 h-9 flex items-center justify-center rounded-xl bg-purple-500/10 border border-purple-500/20">
+                  <Layers size={17} className="text-purple-400" />
+                </span>
+                <h3 className="font-display text-lg sm:text-xl font-bold text-white">
+                  Tech Stack
+                </h3>
+              </div>
+              <p className="text-gray-500 text-xs ml-12">
                 Technologies I work with daily
               </p>
-            </div>
-            {technologies.map((tech) => (
-              <div
-                key={tech.category}
-                className="bg-slate-800 rounded-xl p-4 sm:p-5 border border-slate-700 hover:border-purple-500 transition-all"
-              >
-                <h4 className="text-purple-400 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
-                  {tech.category}
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {tech.items.map((item) => (
-                    <span
-                      key={item}
-                      className="bg-slate-700 hover:bg-purple-600 text-gray-300 hover:text-white px-2.5 py-1 rounded-full text-xs sm:text-sm transition-all cursor-default"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            </Reveal>
+
+            {technologies.map((tech, i) => {
+              const Icon = tech.icon;
+              return (
+                <Reveal key={tech.category} direction="right" delay={i * 100}>
+                  <div className="group bg-white/3 rounded-2xl p-5 border border-white/5 hover:border-purple-500/40 hover:bg-purple-500/4 hover:-translate-y-0.5 transition-all duration-300">
+                    <div className="flex items-center gap-2.5 mb-3.5">
+                      <Icon
+                        size={17}
+                        className="text-purple-400 group-hover:text-fuchsia-400 group-hover:scale-110 transition-all"
+                      />
+                      <h4 className="text-white font-semibold text-sm sm:text-base">
+                        {tech.category}
+                      </h4>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {tech.items.map((item) => (
+                        <span
+                          key={item}
+                          className="bg-white/5 border border-white/5 hover:border-purple-400/40 hover:bg-purple-500/15 hover:text-purple-200 text-gray-300 px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all cursor-default"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </div>
