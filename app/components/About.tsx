@@ -140,6 +140,7 @@ export default function About() {
 
             <a
               href="/cv.pdf"
+              download="Daniel-Isiyemi-CV.pdf"
               className="group inline-flex items-center gap-2.5 bg-linear-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white px-7 py-3.5 rounded-2xl font-semibold text-sm sm:text-base shadow-xl shadow-purple-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5 transition-all duration-300"
             >
               <Download
