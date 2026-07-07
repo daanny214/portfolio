@@ -7,7 +7,7 @@ import {
   ExternalLink,
   Smartphone,
   Globe,
-  Building2,
+  BarChart3,
   TrendingUp,
   Heart,
   Sparkles,
@@ -21,15 +21,15 @@ import { site } from "../lib/site";
 const projects = [
   {
     id: 1,
-    title: "ATM Simulator",
+    title: "DannyStats — World Cup 2026 Predictor",
     description:
-      "A web-based ATM simulator with real Nigerian bank verification using Paystack API. Features PIN authentication, balance checking, deposits, withdrawals, transfers with account verification, and transaction history.",
-    icon: Building2,
-    image: "/projects/atm.png",
-    gradient: "from-emerald-400 via-teal-500 to-cyan-600",
-    tags: ["Next.js", "TypeScript", "Paystack API", "Tailwind CSS"],
-    github: "https://github.com/daanny214/atm-simulator",
-    live: "https://atm-simulator-ten.vercel.app",
+      "Data-driven probability forecasts for the 2026 FIFA World Cup. A Python engine replays Elo ratings over 150 years of internationals, models scorelines with Poisson + Dixon-Coles, and runs 50,000 Monte Carlo tournament simulations — backtested, calibrated, and refreshed daily with the full track record published.",
+    icon: BarChart3,
+    image: "/projects/dannystats.png",
+    gradient: "from-emerald-400 via-green-500 to-teal-600",
+    tags: ["Python", "Next.js", "Monte Carlo", "numpy / pandas"],
+    github: "https://github.com/daanny214/worldcup-predictor",
+    live: "https://dannystats.vercel.app",
     type: "Web App",
   },
   {
