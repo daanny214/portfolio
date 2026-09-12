@@ -28,7 +28,7 @@ const projects = [
     image: "/projects/dannystats.png",
     gradient: "from-emerald-400 via-green-500 to-teal-600",
     tags: ["Python", "scikit-learn", "Next.js", "Monte Carlo"],
-    github: "https://github.com/daanny214/worldcup-predictor",
+    github: "https://github.com/daanny214/soccer-predictor",
     live: "https://dannystats.vercel.app",
     type: "Web App",
   },
