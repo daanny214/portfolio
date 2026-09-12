@@ -21,13 +21,13 @@ import { site } from "../lib/site";
 const projects = [
   {
     id: 1,
-    title: "DannyStats — World Cup 2026 Predictor",
+    title: "DannyStats — Football League Predictor",
     description:
-      "Data-driven probability forecasts for the 2026 FIFA World Cup. A Python engine replays Elo ratings over 150 years of internationals, models scorelines with Poisson + Dixon-Coles, and runs 50,000 Monte Carlo tournament simulations — backtested, calibrated, and refreshed daily with the full track record published.",
+      "Probability forecasts for eight of Europe's top leagues — the Premier League, La Liga, Serie A, Bundesliga and more. A Python engine rates every club with Elo, models scorelines with Dixon-Coles, and trains a gradient-boosting classifier benchmarked strictly out-of-sample against both the statistical baseline and bookmaker odds. 20,000 Monte Carlo season simulations turn that into title, top-four and relegation odds — calibrated, with the full track record published.",
     icon: BarChart3,
     image: "/projects/dannystats.png",
     gradient: "from-emerald-400 via-green-500 to-teal-600",
-    tags: ["Python", "Next.js", "Monte Carlo", "numpy / pandas"],
+    tags: ["Python", "scikit-learn", "Next.js", "Monte Carlo"],
     github: "https://github.com/daanny214/worldcup-predictor",
     live: "https://dannystats.vercel.app",
     type: "Web App",
