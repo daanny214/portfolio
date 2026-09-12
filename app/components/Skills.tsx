@@ -6,13 +6,13 @@ import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 const skills = [
-  { name: "React Native", level: 80 },
+  { name: "React Native", level: 85 },
+  { name: "Expo", level: 80 },
+  { name: "Git", level: 80 },
   { name: "React.js", level: 76 },
   { name: "JavaScript", level: 75 },
   { name: "TypeScript", level: 75 },
-  { name: "Git", level: 73 },
   { name: "Next.js", level: 70 },
-  { name: "Expo", level: 68 },
   { name: "Firebase", level: 65 },
   { name: "Node.js", level: 60 },
 ];
