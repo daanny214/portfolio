@@ -45,8 +45,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* suppressHydrationWarning: browser extensions (ColorZilla, Grammarly
+          and friends) inject attributes into <body> before React hydrates,
+          which otherwise reports a mismatch no visitor can act on */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased`}
+        suppressHydrationWarning
       >
         {children}
       </body>
