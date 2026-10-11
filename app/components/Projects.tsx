@@ -13,11 +13,16 @@ import {
   Sparkles,
   FolderGit2,
   Clock,
+  BookOpen,
 } from "lucide-react";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { site } from "../lib/site";
 
+// `github` only for PUBLIC repos — a private one shows visitors a GitHub 404,
+// which is worse than no button. Leave it "" until the repo is made public.
+// `explainer` stands in where the code stays private but the method is
+// written up (DannyStats is going commercial, so its repo stays private).
 const projects = [
   {
     id: 1,
@@ -28,7 +33,8 @@ const projects = [
     image: "/projects/dannystats.png",
     gradient: "from-emerald-400 via-green-500 to-teal-600",
     tags: ["Python", "scikit-learn", "Next.js", "Monte Carlo"],
-    github: "https://github.com/daanny214/soccer-predictor",
+    github: "",
+    explainer: "https://dannystats.vercel.app/how-it-works",
     live: "https://dannystats.vercel.app",
     type: "Web App",
   },
@@ -41,7 +47,8 @@ const projects = [
     image: "/projects/xchange.png",
     gradient: "from-blue-400 via-indigo-500 to-purple-600",
     tags: ["Next.js", "TypeScript", "CoinGecko API", "Tailwind CSS"],
-    github: "https://github.com/daanny214/currency-converter",
+    github: "",
+    explainer: "",
     live: "https://currency-converter-eight-ruddy.vercel.app",
     type: "Web App",
   },
@@ -54,7 +61,8 @@ const projects = [
     image: "",
     gradient: "from-pink-400 via-rose-500 to-red-600",
     tags: ["React Native", "Expo", "Firebase", "Redux"],
-    github: "https://github.com/daanny214/vibe",
+    github: "",
+    explainer: "",
     live: "",
     type: "Mobile App",
   },
@@ -67,7 +75,8 @@ const projects = [
     image: "",
     gradient: "from-violet-400 via-purple-500 to-fuchsia-600",
     tags: ["Next.js", "Firebase", "OpenAI API", "TypeScript"],
-    github: "https://github.com/daanny214/studybuddy",
+    github: "",
+    explainer: "",
     live: "",
     type: "Web App",
   },
@@ -187,18 +196,33 @@ export default function Projects() {
                     </div>
 
                     <div className="flex gap-3">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-gray-300 hover:text-white px-4 py-3 rounded-xl font-medium text-sm transition-all group/btn"
-                      >
-                        <Github
-                          size={16}
-                          className="group-hover/btn:rotate-12 transition-transform"
-                        />
-                        Code
-                      </a>
+                      {project.explainer ? (
+                        <a
+                          href={project.explainer}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-gray-300 hover:text-white px-4 py-3 rounded-xl font-medium text-sm transition-all group/btn"
+                        >
+                          <BookOpen
+                            size={16}
+                            className="group-hover/btn:rotate-12 transition-transform"
+                          />
+                          How it works
+                        </a>
+                      ) : project.github ? (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-gray-300 hover:text-white px-4 py-3 rounded-xl font-medium text-sm transition-all group/btn"
+                        >
+                          <Github
+                            size={16}
+                            className="group-hover/btn:rotate-12 transition-transform"
+                          />
+                          Code
+                        </a>
+                      ) : null}
                       {project.live ? (
                         <a
                           href={project.live}
