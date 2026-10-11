@@ -28,7 +28,7 @@ const projects = [
     id: 1,
     title: "DannyStats — Football League Predictor",
     description:
-      "Probability forecasts for eight of Europe's top leagues — the Premier League, La Liga, Serie A, Bundesliga and more. A Python engine rates every club with Elo, models scorelines with Dixon-Coles, and trains a gradient-boosting classifier benchmarked strictly out-of-sample against both the statistical baseline and bookmaker odds. 20,000 Monte Carlo season simulations turn that into title, top-four and relegation odds — calibrated, with the full track record published.",
+      "Probability forecasts for eight of Europe's top leagues — the Premier League, La Liga, Serie A, Bundesliga and more. A Python engine rates every club with Elo, models scorelines with Dixon-Coles, and trains a gradient-boosting classifier benchmarked strictly out-of-sample against both the statistical baseline and bookmaker odds. 20,000 Monte Carlo season simulations turn that into title, top-four and relegation odds, checked against five past seasons: every title call made at 90% or more came true (44 of 44).",
     icon: BarChart3,
     image: "/projects/dannystats.png",
     gradient: "from-emerald-400 via-green-500 to-teal-600",
