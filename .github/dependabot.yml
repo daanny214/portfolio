@@ -1,0 +1,12 @@
+# Weekly update PRs for the site's npm packages. Minor and patch bumps are
+# grouped into one PR; major versions (Next.js, React, Tailwind) arrive on
+# their own, since those are the ones worth reading before merging.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
